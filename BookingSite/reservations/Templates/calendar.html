@@ -52,8 +52,20 @@
 
                     function myDateFunction(id) {
                         var date = $("#" + id).data("date");
+                        var dateList = date.split("-");
+                        var year = dateList[0];
+                        var month = dateList[1];
+                        var day = dateList[2];
+
                         console.log(date)
+                        move(year, month, day)
                         return true;
+                    }
+
+                    function move(year, month, day){
+
+                        window.location = "http://localhost:8000/reservations/test/?" + "year="+ year +
+                                "&month=" +month+ "&day=" + day;
                     }
 
                     function myNavFunction(id) {

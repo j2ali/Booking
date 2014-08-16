@@ -3,6 +3,7 @@ from django.conf.urls import url
 from reservations import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.calendar, name='calendar'),
+    url(r'^test/$', views.test, name='test')
 
 ]
