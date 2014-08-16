@@ -1,5 +1,6 @@
 from django.template import RequestContext, loader
 from django.shortcuts import render_to_response
+from models import *
 from django.template import Template, Context
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -8,16 +9,13 @@ from django.utils import simplejson as json
 
 # Create your views here.
 def calendar(request):
-
     t = get_template('calendar.html')
     c = Context({'message': 'This is a Calendar'})
-
     html = t.render(c)
-
     return HttpResponse(html)
 
-def test(request):
 
+def test(request):
     t = get_template('test.html')
 
     year = request.GET['year']
