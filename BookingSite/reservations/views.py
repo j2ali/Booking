@@ -8,7 +8,7 @@ from django.template.loader import get_template
 # Create your views here.
 def index(request):
 
-    t = get_template('calender.html')
+    t = get_template('calendar.html')
     c = Context({'message': 'This is a Calender'})
 
     html = t.render(c)
