@@ -23,9 +23,9 @@ def book(request):
 
     r = Reservation.objects.create(time_slot=time_slot, patient_info=name)
     r.save()
-
+    c = Context({'time': time, 'date': date, 'name': name})
     template = get_template('book.html')
-    html = template.render(Context())
+    html = template.render(Context(c))
     return HttpResponse(html)
 
 

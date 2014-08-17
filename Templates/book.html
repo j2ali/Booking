@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html>
+<!-- Latest compiled and minified CSS -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<link rel="stylesheet" href="/static/bootstrap.css">
+<link rel="stylesheet" href="/static/custom.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
-Your appointment has been booked
+<h4>{{ name }}, your appointment has been booked for: </h4>
+<h4 class="text-center"> {{ time }} </h4>
+<h4 class="text-center"> on </h4>
+<h4 class="text-center"> {{ date }} </h4>
 </body>
 </html>

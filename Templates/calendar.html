@@ -13,6 +13,7 @@
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/custom.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -20,16 +21,13 @@
     <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Zabuto -->
-    <link rel="stylesheet" type="text/css" href="//zabuto.com/assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="//zabuto.com/assets/css/examples.css">
-
     <!-- Zabuto Calendar -->
     <script src="../static/zabuto_calendar.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/zabuto_calendar.css">
 
 </head>
 <body>
+<h3>Book and an appointment</h3>
 <div class="row">
     <div class="col">
 
@@ -44,10 +42,6 @@
                             action_nav: function () {
                                 return myNavFunction(this.id);
                             },
-                            legend: [
-                                {type: "text", label: "Special event", badge: "00"},
-                                {type: "block", label: "Regular event"}
-                            ]
                         });
                     });
 
