@@ -1,11 +1,11 @@
-from django.template import RequestContext, loader
-from django.shortcuts import render_to_response
-from models import *
-from django.template import Template, Context
+import datetime
+
+from django.template import Context
 from django.http import HttpResponse
 from django.template.loader import get_template
-import datetime
-from django.utils import simplejson as json
+
+from reservations.models import *
+
 
 
 # Create your views here.

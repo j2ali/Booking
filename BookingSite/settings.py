@@ -41,7 +41,7 @@ INSTALLED_APPS = (
 )
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_ROOT, 'reservations/Templates/'),
+    os.path.join(PROJECT_ROOT, '../../reservations/Templates/'),
 )
 
 MIDDLEWARE_CLASSES = (
