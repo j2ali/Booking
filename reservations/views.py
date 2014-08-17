@@ -16,6 +16,13 @@ def calendar(request):
 
 
 def book(request):
+    time = request.GET['time']
+    date = request.GET['date']
+    time_slot = get_time_slot(date, time)
+
+    r = Reservation.objects.create(time_slot=time_slot, patient_info='Badman')
+    r.save()
+
     template = get_template('book.html')
     html = template.render(Context())
     return HttpResponse(html)

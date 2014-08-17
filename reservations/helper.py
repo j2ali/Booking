@@ -15,5 +15,24 @@ def get_available_time_slots(hours, appointments, duration=timedelta(hours=1)):
 def build_appointments_list(appointments):
     appointments_list = []
     for appointment in appointments:
-        appointments_list.append(appointment.time_slot)
+        appointment = (datetime(appointment.time_slot.year,
+                                appointment.time_slot.month,
+                                appointment.time_slot.day,
+                                appointment.time_slot.hour),
+                       datetime(appointment.time_slot.year,
+                                appointment.time_slot.month,
+                                appointment.time_slot.day,
+                                appointment.time_slot.hour + 1))
+
+        appointments_list.append(appointment)
     return appointments_list
+
+
+def get_time_slot(date, time):
+    date_list = date.split('-')
+    year = date_list[0]
+    month = date_list[1]
+    day = date_list[2]
+    hour = time.split('-')[0].split(':')[0]
+    time_slot = datetime(int(year), int(month), int(day), int(hour))
+    return time_slot
