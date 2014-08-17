@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<!-- Latest compiled and minified CSS -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<link rel="stylesheet" href="/static/bootstrap.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<table class="table table-striped table-bordered table-hover table-responsive">
+<p>Appointments  = {{ message }}</p>
+{% for appointment in appointment_list %}
+    <tr>
+        <td time="{{ appointment }}" date="{{ date }}">{{ appointment }}</td>
+    </tr>
+{% endfor %}
+</table>
+</body>
+<script type="application/javascript">
+    $(document).ready(function (){
+        $('td').on('click', function(){
+            var time = $(this).attr('time')
+            var date = $(this).attr('date')
+            console.log($(this).attr('time'))
+            nav(time, date)
+        })
+
+        function nav(time, date){
+            window.location = "/reservations/book/?time=" +time +"&date=" + date
+        }
+    })
+</script>
+</html>
+

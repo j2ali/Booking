@@ -1,11 +1,10 @@
-import datetime
-
+from helper import *
 from django.template import Context
+
 from django.http import HttpResponse
 from django.template.loader import get_template
 
 from reservations.models import *
-
 
 
 # Create your views here.
@@ -16,6 +15,12 @@ def calendar(request):
     return HttpResponse(html)
 
 
+def book(request):
+    template = get_template('book.html')
+    html = template.render(Context())
+    return HttpResponse(html)
+
+
 def test(request):
     t = get_template('test.html')
 
@@ -23,14 +28,19 @@ def test(request):
     month = int(request.GET['month'])
     day = int(request.GET['day'])
 
-    start_date = datetime.date(year, month, day)
-    end_date = start_date + datetime.timedelta(days=1)
+    start_date = datetime(year, month, day, 9)
+    end_date = datetime(year, month, day, 18)
+    hours = [start_date, end_date]
 
-    if Reservation.objects.filter(time_slot__year=year, time_slot__month=month, time_slot__day=day).count() == 0:
-        test = 'Nothing in DB'
-    test = 'Oh snap!'
+    exiting_appointments = Reservation.objects.filter(time_slot__year=year, time_slot__month=month, time_slot__day=day)
 
-    c = Context({'message': test})
+    if exiting_appointments.count() == 0:
+        appointments = []
+    else:
+        appointments = build_appointments_list(exiting_appointments)
+    appointment_list = get_available_time_slots(hours, appointments)
+    date = "-".join([str(year), str(month), str(day)])
+    c = Context({'appointment_list': appointment_list, 'date': date})
 
     html = t.render(Context(c))
     return HttpResponse(html)
