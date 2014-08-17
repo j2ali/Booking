@@ -10,6 +10,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title></title>
 </head>
@@ -18,21 +19,50 @@
 <p>Appointments  = {{ message }}</p>
 {% for appointment in appointment_list %}
     <tr>
-        <td time="{{ appointment }}" date="{{ date }}">{{ appointment }}</td>
+        <td time="{{ appointment }}" date="{{ date }}">
+            <div class="span4 proj-div" data-toggle="modal" data-target="#GSCCModal">
+                {{ appointment }}
+            </div>
+        </td>
     </tr>
 {% endfor %}
 </table>
+<div id="GSCCModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+        <h4 class="modal-title" id="myModalLabel">Enter your name</h4>
+      </div>
+      <div class="modal-body">
+        <li class="nav-header">Name</li>
+        <li><input class="input-xlarge" id="name" value="" type="text" name="name"></li>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="save_appointment">Book Appointment</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 <script type="application/javascript">
     $(document).ready(function (){
-        $('td').on('click', function(){
-            var time = $(this).attr('time')
-            var date = $(this).attr('date')
-            nav(time, date)
-        })
+        var time;
+        var date;
 
-        function nav(time, date){
-            window.location = "/reservations/book/?time=" +time +"&date=" + date
+        $('td').on('click', function(){
+            time = $(this).attr('time');
+            date = $(this).attr('date');
+        });
+
+         $('#save_appointment').on('click', function(){
+            var name = document.getElementById("name").value;
+            nav(time, date, name)
+        });
+
+        function nav(time, date, name){
+            window.location = "/reservations/book/?time=" +time +"&date=" + date + "&name=" + name
         }
     })
 </script>

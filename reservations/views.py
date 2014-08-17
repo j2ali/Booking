@@ -18,9 +18,10 @@ def calendar(request):
 def book(request):
     time = request.GET['time']
     date = request.GET['date']
+    name = request.GET['name']
     time_slot = get_time_slot(date, time)
 
-    r = Reservation.objects.create(time_slot=time_slot, patient_info='Badman')
+    r = Reservation.objects.create(time_slot=time_slot, patient_info=name)
     r.save()
 
     template = get_template('book.html')
