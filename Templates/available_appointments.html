@@ -38,6 +38,10 @@
       <div class="modal-body">
         <p >Name</p>
         <p><input class="input-xlarge" id="name" value="" type="text" name="name"></p>
+        <p >Phone Number</p>
+        <p><input class="input-xlarge" id="phone_number" value="" type="text" name="phone_number"></p>
+        <p >Email</p>
+        <p><input class="input-xlarge" id="email" value="" type="text" name="email"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -59,11 +63,14 @@
 
          $('#save_appointment').on('click', function(){
             var name = document.getElementById("name").value;
-            nav(time, date, name)
+            var email = document.getElementById("email").value;
+            var phone_number = document.getElementById("phone_number").value;
+            nav(time, date, name, email, phone_number)
         });
 
-        function nav(time, date, name){
-            window.location = "/reservations/book/?time=" +time +"&date=" + date + "&name=" + name
+        function nav(time, date, name, email, phone_number){
+            window.location = "/reservations/book/?time=" +time +"&date=" + date + "&name=" + name +
+                                "&email=" + email + "&phone_number=" + phone_number
         }
     })
 </script>

@@ -1,11 +1,9 @@
 from helper import *
 from django.template import Context
-
 from django.http import HttpResponse
 from django.template.loader import get_template
-
 from reservations.models import *
-
+from reservations.email import *
 
 # Create your views here.
 def calendar(request):
@@ -19,6 +17,9 @@ def book(request):
     time = request.GET['time']
     date = request.GET['date']
     name = request.GET['name']
+    email = request.GET['email']
+    phone_number = request.GET['phone_number']
+
     time_slot = get_time_slot(date, time)
 
     r = Reservation.objects.create(time_slot=time_slot, patient_info=name)
@@ -26,11 +27,14 @@ def book(request):
     c = Context({'time': time, 'date': date, 'name': name})
     template = get_template('book.html')
     html = template.render(Context(c))
+
+    sendEmail(email)
+
     return HttpResponse(html)
 
 
 def test(request):
-    t = get_template('test.html')
+    t = get_template('available_appointments.html')
 
     year = int(request.GET['year'])
     month = int(request.GET['month'])
@@ -46,6 +50,7 @@ def test(request):
         appointments = []
     else:
         appointments = build_appointments_list(exiting_appointments)
+
     appointment_list = get_available_time_slots(hours, appointments)
     date = "-".join([str(year), str(month), str(day)])
     c = Context({'appointment_list': appointment_list, 'date': date})
@@ -53,5 +58,3 @@ def test(request):
     html = t.render(Context(c))
     return HttpResponse(html)
 
-
-# Create your views here.
