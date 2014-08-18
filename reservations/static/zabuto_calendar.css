@@ -36,6 +36,7 @@ div.zabuto_calendar .table tr.calendar-month-header th span {
 
 div.zabuto_calendar .table tr.calendar-dow-header th {
     background-color: #f0f0f0;
+
 }
 
 div.zabuto_calendar .table tr:last-child {
@@ -66,7 +67,10 @@ div.zabuto_calendar div.calendar-month-navigation {
 div.zabuto_calendar tr.calendar-dow-header th,
 div.zabuto_calendar tr.calendar-dow td {
     width: 14%;
+
+    /*background-color: #B4CDCD;*/
 }
+
 
 div.zabuto_calendar .table tr td div.day {
     margin: 0;

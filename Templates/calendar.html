@@ -27,7 +27,7 @@
 
 </head>
 <body>
-<h3>Book and an appointment</h3>
+<h3>Book an appointment</h3>
 <div class="row">
     <div class="col">
 
@@ -37,7 +37,9 @@
                     $(document).ready(function () {
                         $("#my-calendar").zabuto_calendar({
                             action: function () {
-                                return myDateFunction(this.id, false);
+                                console.log(this)
+                                return myDateFunction(this.attr('date'), false);
+
                             },
                             action_nav: function () {
                                 return myNavFunction(this.id);
@@ -47,6 +49,7 @@
 
                     function myDateFunction(id) {
                         var date = $("#" + id).data("date");
+                        console.log("id= " + id)
                         var dateList = date.split("-");
                         var year = dateList[0];
                         var month = dateList[1];

@@ -262,14 +262,16 @@ $.fn.zabuto_calendar = function (options) {
 
             for (var wk = 0; wk < weeksInMonth; wk++) {
                 var $dowRow = $('<tr class="calendar-dow"></tr>');
+                days_in_month = []
+
                 for (var dow = 0; dow < 7; dow++) {
                     if (dow < firstDow || currDayOfMonth > lastDayinMonth) {
                         $dowRow.append('<td></td>');
                     } else {
-                        var dateId = $calendarElement.attr('id') + '_' + dateAsString(year, month, currDayOfMonth);
-                        var dayId = dateId + '_day';
+                        var date = dateAsString(year, month, currDayOfMonth)
+                        days_in_month.push(date);
 
-                        var $dayElement = $('<div id="' + dayId + '" class="day" >' + currDayOfMonth + '</div>');
+                        var $dayElement = $('<div date="' + date + '" class="day" >' + currDayOfMonth + '</div>');
                         $dayElement.data('day', currDayOfMonth);
 
                         if ($calendarElement.data('showToday') === true) {
@@ -278,7 +280,8 @@ $.fn.zabuto_calendar = function (options) {
                             }
                         }
 
-                        var $dowElement = $('<td id="' + dateId + '"></td>');
+
+                        var $dowElement = $('<td date="' + date + '" + ></td>');
                         $dowElement.append($dayElement);
 
                         $dowElement.data('date', dateAsString(year, month, currDayOfMonth));
@@ -301,8 +304,26 @@ $.fn.zabuto_calendar = function (options) {
                     }
                 }
 
+
                 $tableObj.append($dowRow);
             }
+
+            //get days in DB where days are fully booked
+            var booked_days = $.ajax({type: "GET",url: "/reservations/get_booked_days",async:true}).done(function(){
+
+                var booked_days_str = booked_days.responseText;
+                var booked_days_ar = booked_days_str.split("/");
+
+                for (var i = 0; i < booked_days_ar.length; i++) {
+                    if(parseInt(booked_days_ar[i].substring(5,7)) == (month+1) ){
+
+                    console.log("here")
+                    $('[date='+booked_days_ar[i]+']').css("background-color","#B8B8A0");
+                    }
+                }
+            });
+
+
             return $tableObj;
         }
 
