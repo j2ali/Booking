@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html>
-<!-- Latest compiled and minified CSS -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<link rel="stylesheet" href="/static/bootstrap.css">
-<link rel="stylesheet" href="/static/custom.css">
+{% extends "base.html" %}
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<head lang="en">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% block content %}
 <h4>Available appointments</h4>
 <table class="table table-striped table-bordered table-hover table-responsive">
 {% for appointment in appointment_list %}
@@ -50,29 +35,6 @@
     </div>
   </div>
 </div>
-</body>
-<script type="application/javascript">
-    $(document).ready(function (){
-        var time;
-        var date;
 
-        $('td').on('click', function(){
-            time = $(this).attr('time');
-            date = $(this).attr('date');
-        });
-
-         $('#save_appointment').on('click', function(){
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            var phone_number = document.getElementById("phone_number").value;
-            nav(time, date, name, email, phone_number)
-        });
-
-        function nav(time, date, name, email, phone_number){
-            window.location = "/reservations/book/?time=" +time +"&date=" + date + "&name=" + name +
-                                "&email=" + email + "&phone_number=" + phone_number
-        }
-    })
-</script>
-</html>
+{% endblock content %}
 

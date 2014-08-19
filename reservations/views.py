@@ -1,16 +1,12 @@
-from helper import *
-from django.template import Context
-from django.http import HttpResponse
-from django.template.loader import get_template
+from django.shortcuts import render
+
 from reservations.models import *
 from reservations.email import *
+from helper import *
 
-# Create your views here.
+
 def calendar(request):
-    t = get_template('calendar.html')
-    c = Context({'message': 'This is a Calendar'})
-    html = t.render(c)
-    return HttpResponse(html)
+    return render(request, 'calendar.html', {'message': 'This is a Calendar'})
 
 
 def book(request):
@@ -24,18 +20,13 @@ def book(request):
 
     r = Reservation.objects.create(time_slot=time_slot, patient_info=name)
     r.save()
-    c = Context({'time': time, 'date': date, 'name': name})
-    template = get_template('book.html')
-    html = template.render(Context(c))
 
     sendEmail(email)
 
-    return HttpResponse(html)
+    return render(request, "book.html", {'time': time, 'date': date, 'name': name})
 
 
 def test(request):
-    t = get_template('available_appointments.html')
-
     year = int(request.GET['year'])
     month = int(request.GET['month'])
     day = int(request.GET['day'])
@@ -44,17 +35,14 @@ def test(request):
     end_date = datetime(year, month, day, 18)
     hours = [start_date, end_date]
 
-    exiting_appointments = Reservation.objects.filter(time_slot__year=year, time_slot__month=month, time_slot__day=day)
+    existing_appointments = Reservation.objects.filter(time_slot__year=year, time_slot__month=month, time_slot__day=day)
 
-    if exiting_appointments.count() == 0:
+    if existing_appointments.count() == 0:
         appointments = []
     else:
-        appointments = build_appointments_list(exiting_appointments)
+        appointments = build_appointments_list(existing_appointments)
 
     appointment_list = get_available_time_slots(hours, appointments)
     date = "-".join([str(year), str(month), str(day)])
-    c = Context({'appointment_list': appointment_list, 'date': date})
 
-    html = t.render(Context(c))
-    return HttpResponse(html)
-
+    return render(request, 'available_appointments.html', {'appointment_list': appointment_list, 'date': date})

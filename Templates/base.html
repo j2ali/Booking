@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock title %}</title>
+    <!-- Latest compiled and minified CSS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/custom.css">
+
+    <!-- jQuery CDN -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+    <!-- Zabuto Calendar -->
+    <script src="/static/zabuto_calendar.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/zabuto_calendar.css">
+
+    <!-- JS Scripts -->
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    {% include "nav.html" %}
+    {% block content %} {% endblock content%}
+</body>
+</html>
