@@ -5,7 +5,8 @@ $(document).ready(function () {
         },
         action_nav: function () {
             return myNavFunction(this.id);
-        }
+        },
+        today: true
     });
 
     var time;
@@ -52,25 +53,3 @@ function nav(time, date, name, email, phone_number){
     window.location = "/reservations/book/?time=" +time +"&date=" + date + "&name=" + name +
         "&email=" + email + "&phone_number=" + phone_number
 }
-
-$(document).ready(function (){
-        var time;
-        var date;
-
-        $('td').on('click', function(){
-            time = $(this).attr('time');
-            date = $(this).attr('date');
-        });
-
-         $('#save_appointment').on('click', function(){
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            var phone_number = document.getElementById("phone_number").value;
-            nav(time, date, name, email, phone_number)
-        });
-
-        function nav(time, date, name, email, phone_number){
-            window.location = "/reservations/book/?time=" +time +"&date=" + date + "&name=" + name +
-                                "&email=" + email + "&phone_number=" + phone_number
-        }
-    })
